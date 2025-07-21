@@ -4,7 +4,7 @@ from selenium.webdriver.common.by import By  # 匯入定位元素的 By 模組
 
 
 options = Options()  # 建立 Chrome 設定物件
-options.chrome_executable_path = "/Users/denny89928/程式設計/網路爬蟲/chromedriver-mac-arm64/chromedriver"  # 指定 ChromeDriver 的執行檔路徑
+options.chrome_executable_path = "chromedriver位置"  # 指定 ChromeDriver 的執行檔路徑
 driver = webdriver.Chrome(options=options)  # 使用指定的設定啟動 Chrome 瀏覽器
 
 
