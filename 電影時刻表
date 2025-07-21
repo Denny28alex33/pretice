@@ -1,0 +1,23 @@
+from selenium import webdriver  # 匯入 selenium 的 webdriver 模組
+from selenium.webdriver.chrome.options import Options  # 匯入 Chrome 瀏覽器設定模組
+from selenium.webdriver.common.by import By  # 匯入定位元素的 By 模組
+
+
+options = Options()  # 建立 Chrome 設定物件
+options.chrome_executable_path = "/Users/denny89928/程式設計/網路爬蟲/chromedriver-mac-arm64/chromedriver"  # 指定 ChromeDriver 的執行檔路徑
+driver = webdriver.Chrome(options=options)  # 使用指定的設定啟動 Chrome 瀏覽器
+
+
+# 打開目標網站（這裡請自行替換為你要爬取的網址）
+driver.get("https://www.in89cinemax.com/film_list.aspx?TheaterId=15")
+# print(driver.page_source) 可以取得原始碼
+
+# 取得所有標題元素（根據 class 名稱為 title）
+tags = driver.find_elements(By.CLASS_NAME, "list")
+for titles in tags:
+    links = titles.find_elements(By.TAG_NAME, "p")  # 在每個 list 區塊中找出所有 <a> 標籤
+    for link in links:
+        print(link.text)  # 印出每個連結的文字
+
+
+driver.close()  # 關閉瀏覽器
