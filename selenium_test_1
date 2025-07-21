@@ -1,0 +1,29 @@
+from selenium import webdriver  # 匯入 selenium 的 webdriver 模組
+from selenium.webdriver.chrome.options import Options  # 匯入 Chrome 瀏覽器設定模組
+from selenium.webdriver.common.by import By  # 匯入定位元素的 By 模組
+
+
+options = Options()  # 建立 Chrome 設定物件
+options.chrome_executable_path = "chromedriver的路徑"  # 指定 ChromeDriver 的執行檔路徑
+driver = webdriver.Chrome(options=options)  # 使用指定的設定啟動 Chrome 瀏覽器
+
+
+# 打開目標網站（這裡請自行替換為你要爬取的網址）
+driver.get("網址連結")
+# print(driver.page_source) 可以取得原始碼
+
+# 取得所有標題元素（根據 class 名稱為 title）
+tags = driver.find_elements(By.CLASS_NAME,"title")
+for tag in tags:
+    print(tag.text)  # 印出每個標題的文字
+
+# 尋找「‹ 上頁」的超連結並點擊它
+link = driver.find_element(By.LINK_TEXT,"‹ 上頁")
+link.click()
+
+# 再次取得新一頁的所有標題元素
+tags = driver.find_elements(By.CLASS_NAME,"title")
+for tag in tags:
+    print(tag.text)  # 印出每個標題的文字
+
+driver.close()  # 關閉瀏覽器
